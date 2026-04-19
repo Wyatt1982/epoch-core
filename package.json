@@ -1,0 +1,26 @@
+{
+  "name": "suanming-engine",
+  "version": "0.1.0",
+  "description": "四柱八字、紫微斗數、西洋占星、Jyotish 吠陀占星計算引擎",
+  "main": "src/index.ts",
+  "license": "GPL-3.0-or-later",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "scripts": {
+    "clean": "node ./scripts/clean.mjs",
+    "verify": "npm run clean && tsc -p tsconfig.verify.json && node ./dist-verify/tests/verify.js",
+    "check": "npm run verify"
+  },
+  "dependencies": {
+    "iztro": "^2.5.8",
+    "lunar-typescript": "^1.8.6",
+    "swisseph-wasm": "^0.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
