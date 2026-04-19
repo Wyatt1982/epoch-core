@@ -1,4 +1,4 @@
-// suanming-engine public API
+// epoch-core public API
 export { buildChartResponse } from './buildChartResponse'
 export { generatePrompt } from './prompt'
 export { calculateRectification } from './rectification'

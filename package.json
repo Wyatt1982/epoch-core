@@ -1,7 +1,7 @@
 {
-  "name": "suanming-engine",
+  "name": "epoch-core",
   "version": "0.1.0",
-  "description": "四柱八字、紫微斗數、西洋占星、Jyotish 吠陀占星計算引擎",
+  "description": "Structured computation of classical astrological systems from birth data.",
   "main": "src/index.ts",
   "license": "GPL-3.0-or-later",
   "type": "commonjs",

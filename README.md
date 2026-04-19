@@ -1,4 +1,4 @@
-# suanming-engine
+# epoch-core
 
 A TypeScript library for computing structured astronomical and calendrical
 chart data from birth coordinates.
@@ -25,7 +25,7 @@ npm install
 ## Usage
 
 ```ts
-import { buildChartResponse } from 'suanming-engine'
+import { buildChartResponse } from 'epoch-core'
 
 const result = await buildChartResponse({
   name: '王小明',
@@ -64,20 +64,20 @@ Main entry point. Computes all four systems and returns the aggregated payload.
 ### Individual modules
 
 ```ts
-import { buildBaziModule }    from 'suanming-engine'  // Four Pillars
-import { buildZiweiModule }   from 'suanming-engine'  // Zi Wei Dou Shu
-import { buildWesternModule } from 'suanming-engine'  // Western astrology
-import { buildJyotishPayload } from 'suanming-engine' // Jyotish
+import { buildBaziModule }    from 'epoch-core'  // Four Pillars
+import { buildZiweiModule }   from 'epoch-core'  // Zi Wei Dou Shu
+import { buildWesternModule } from 'epoch-core'  // Western astrology
+import { buildJyotishPayload } from 'epoch-core' // Jyotish
 ```
 
 ### Utilities
 
 ```ts
-import { calculateBazi }        from 'suanming-engine'
-import { calculateZiwei }       from 'suanming-engine'
-import { getSunSign }           from 'suanming-engine'
-import { calculateRectification } from 'suanming-engine'
-import { getHourIndexFromClock }  from 'suanming-engine'
+import { calculateBazi }        from 'epoch-core'
+import { calculateZiwei }       from 'epoch-core'
+import { getSunSign }           from 'epoch-core'
+import { calculateRectification } from 'epoch-core'
+import { getHourIndexFromClock }  from 'epoch-core'
 ```
 
 ## Output schema
