@@ -9,6 +9,8 @@ export { buildZiweiModule } from './ziwei/module'
 export { buildWesternModule } from './western/module'
 export { getSunSign } from './western/sunSign'
 export { buildJyotishPayload } from './jyotish'
+export { buildNumerologyModule } from './numerology/module'
+export { calculateLifePath, calculateBirthdayNumber, calculatePersonalYear } from './numerology/calc'
 export { getHourIndexFromClock, getTimeZhiLabel, TIME_ZHI_OPTIONS } from './timeZhi'
 
 export type {
@@ -19,6 +21,7 @@ export type {
   ZiweiModule,
   WesternModule,
   JyotishModule,
+  NumerologyModule,
   WesternAspect,
   WesternHouse,
   ZiweiSihuaConnection,

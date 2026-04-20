@@ -101,6 +101,35 @@ export interface ChartSummary {
     current_maha_dasha: string | null
     current_antar_dasha?: string | null
   }
+  numerology: {
+    life_path_number: number | null
+    life_path_is_master: boolean
+    life_path_keyword: string | null
+  }
+}
+
+export interface NumerologyModule {
+  module: 'numerology'
+  system: 'Pythagorean'
+  life_path: {
+    number: number
+    is_master: boolean
+    label: string
+    keyword: string
+    description: string
+  }
+  birthday: {
+    number: number
+    is_master: boolean
+    label: string
+    keyword: string
+  }
+  personal_year: {
+    number: number
+    year: number
+    label: string
+    keyword: string
+  }
 }
 
 export interface WesternAngle {
@@ -475,6 +504,7 @@ export interface ChartPayload {
   ziwei: ZiweiModule
   western: WesternModule
   jyotish: JyotishModule
+  numerology: NumerologyModule
   rectification: RectificationInfo
   usage_stats: UsageStats
   provenance: JsonObject

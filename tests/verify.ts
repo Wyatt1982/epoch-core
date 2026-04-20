@@ -3,6 +3,7 @@ import { calculateBazi } from '../src/bazi/calc'
 import { calculateZiwei } from '../src/ziwei/calc'
 import { getSunSign } from '../src/western/sunSign'
 import { buildChartResponse } from '../src/buildChartResponse'
+import { calculateLifePath, calculateBirthdayNumber, calculatePersonalYear } from '../src/numerology/calc'
 
 type UnknownBaziSection = {
   four_pillars?: {
@@ -122,6 +123,44 @@ async function runVerification() {
 
     console.log('')
   }
+
+  // ==========================================
+  // 生命靈數驗證（基準案例 1982-02-25）
+  // 生命路徑數 11（主數）、生日數 7、個人年 2026 = 1
+  // ==========================================
+  console.log('📋 生命靈數（Pythagorean）')
+
+  const lpResult = calculateLifePath(1982, 2, 25)
+  if (lpResult.number === 11 && lpResult.isMaster === true) {
+    console.log(`   ✅ 生命路徑數：${lpResult.number}（主數 ${lpResult.isMaster}）`)
+    passed++
+  } else {
+    console.log(`   ❌ 生命路徑數：預期 11（主數），實際 ${lpResult.number}（isMaster=${lpResult.isMaster}）`)
+    failed++
+    errors.push('生命靈數 - 生命路徑數')
+  }
+
+  const bdResult = calculateBirthdayNumber(25)
+  if (bdResult.number === 7) {
+    console.log(`   ✅ 生日數：${bdResult.number}`)
+    passed++
+  } else {
+    console.log(`   ❌ 生日數：預期 7，實際 ${bdResult.number}`)
+    failed++
+    errors.push('生命靈數 - 生日數')
+  }
+
+  const pyResult = calculatePersonalYear(2, 25, 2026)
+  if (pyResult.number === 1 && pyResult.year === 2026) {
+    console.log(`   ✅ 個人年 ${pyResult.year}：${pyResult.number}`)
+    passed++
+  } else {
+    console.log(`   ❌ 個人年 2026：預期 1，實際 ${pyResult.number}`)
+    failed++
+    errors.push('生命靈數 - 個人年')
+  }
+
+  console.log('')
 
   console.log('📋 未知出生時間定盤模式')
   const unknownTimeResult = await buildChartResponse({

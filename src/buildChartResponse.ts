@@ -1,4 +1,4 @@
-// 命盤 orchestrator：組合四個模組（bazi / ziwei / western / jyotish）成最終輸出。
+// 命盤 orchestrator：組合五個模組（bazi / ziwei / western / jyotish / numerology）成最終輸出。
 import { buildJyotishPayload } from './jyotish'
 import { generatePrompt } from './prompt'
 import type {
@@ -22,6 +22,7 @@ import {
 import { buildBaziModule } from './bazi/module'
 import { buildZiweiModule } from './ziwei/module'
 import { buildWesternModule } from './western/module'
+import { buildNumerologyModule } from './numerology/module'
 
 function getRectificationInfo(needed: boolean, data?: RectificationData) {
   return {
@@ -137,6 +138,7 @@ export async function buildChartResponse(input: ChartRequestInput): Promise<Char
   const western = await buildWesternModule(input)
   const bazi = buildBaziModule(input)
   const ziwei = buildZiweiModule(input)
+  const numerology = buildNumerologyModule(input)
   const jyotish = buildJyotishPayload({
     swe,
     julianDayUT,
@@ -214,11 +216,17 @@ export async function buildChartResponse(input: ChartRequestInput): Promise<Char
         current_maha_dasha: jyotish.dashas?.current_maha_dasha?.planet ?? null,
         current_antar_dasha: jyotish.dashas?.current_antar_dasha?.planet ?? null,
       },
+      numerology: {
+        life_path_number: numerology.life_path.number,
+        life_path_is_master: numerology.life_path.is_master,
+        life_path_keyword: numerology.life_path.keyword,
+      },
     },
     bazi,
     ziwei,
     western,
     jyotish,
+    numerology,
     rectification: getRectificationInfo(Boolean(input.birthTimeUnknown || input.hourIndex === null), rectificationData),
     usage_stats: {
       enabled: false,
@@ -235,12 +243,14 @@ export async function buildChartResponse(input: ChartRequestInput): Promise<Char
       ziwei_engine: 'iztro',
       western_engine: 'swisseph-wasm',
       jyotish_engine: 'swisseph-wasm',
+      numerology_system: 'Pythagorean',
       western_house_system: 'Placidus',
       western_zodiac: 'Tropical',
       notes: [
         '西洋占星同時輸出 Placidus 與 Whole Sign。',
         '紫微飛星連線以本命宮干與當層星曜對位計算。',
         'Jyotish 採 Lahiri Ayanamsa 與 Whole Sign house。',
+        '生命靈數採畢達哥拉斯（Pythagorean）系統，主數 11/22/33 不化簡。',
       ],
     },
   }
